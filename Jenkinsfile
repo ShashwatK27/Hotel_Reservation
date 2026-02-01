@@ -1,6 +1,10 @@
 pipeline {
   agent any
 
+  options {
+    skipDefaultCheckout(true)
+  }
+
   environment{
   VENV_DIR = 'venv'
   GCP_PROJECT = "project-4b9b9e01-df7f-4cad-803"
