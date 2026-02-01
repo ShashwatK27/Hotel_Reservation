@@ -26,11 +26,11 @@ pipeline {
         script{
           echo 'Setting up Virtual Environment..............'
           sh '''
-          python -m venv ${VENV_DIR}
-          . ${VENV_DIR}/bin/activate
-          pip install --upgrade pip
-          pip install -e . 
-          '''
+      /usr/bin/python3 -m venv venv
+      . venv/bin/activate
+      /usr/bin/python3 -m pip install --upgrade pip
+      pip install -e .
+    '''
         }
       }
     }
