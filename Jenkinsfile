@@ -8,7 +8,6 @@ pipeline {
   environment{
   VENV_DIR = 'venv'
   GCP_PROJECT = "project-4b9b9e01-df7f-4cad-803"
-  GCLOUD_PATH = "/var/jenkins_home/google-cloud-sdk/bin"
   }
 
   stages{
@@ -40,7 +39,6 @@ pipeline {
         script{
           echo 'Pushing Docker image to GCR..............'
           sh '''
-          export PATH=$PATH:${GCLOUD_PATH}
 
           gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
 
