@@ -25,7 +25,7 @@ pipeline {
       steps{
         script{
           echo 'Setting up Virtual Environment..............'
-          sh sh '''
+          sh '''
       /usr/bin/python3 -m venv venv
 
       venv/bin/python -m pip install --upgrade pip
