@@ -56,5 +56,29 @@ pipeline {
       }
       }
     }
+
+    stage('Deploy to Google Cloud Run'){
+      steps{
+        withCredentials([file(credentialsId:'gcloud-token', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]){
+        script{
+          echo 'Deploying to Google Cloud Run.........'
+          sh '''
+
+          gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+
+          venv/bin/python pipelines/training_pipeline.py
+
+          gcloud config set project ${GCP_PROJECT}
+
+          gcloud run deploy ml-project \
+              --image=gcr.io/${GCP_PROJECT}/ml-project:latest \
+              --platform=managed \
+              --region=us-central1 \
+              --allow-unauthenticated
+          '''
+        }
+      }
+      }
+    }
   }
 }
